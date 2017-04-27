@@ -31,7 +31,7 @@ app.use(bodyParser.json())
 app.options('/api/status', cors());
 app.get('/api/status', cors(), function(req, res) {
     recording = shell.ls(RECORDING_PATH).length > 0;
-    var recordCount = shell.ls(`${RECORDED_PATH}/*.h264`).length;
+    var recordCount = shell.exec(`ls -l ${RECORDED_PATH}/*.h264 2>/dev/null | wc -l`, {silent: true}).stdout;
     res.send({
         recording,
         recordCount
