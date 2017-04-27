@@ -35,12 +35,22 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 .logo{
+  display: inline-block;
   background: url("walls-logo.svg");
   background-size: 200px 200px;
   width: 200px;
   height: 200px;
   margin: 0 auto;
-  text-align: center;
+}
+.cam{
+  display: inline-block;
+  background: url("favicon.ico");
+  background-size: 100px 100px;
+  background-position: 0 50px;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 200px;
+  margin: 0 auto;
 }
 .form{
   padding: 30px;
