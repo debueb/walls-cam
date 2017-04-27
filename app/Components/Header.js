@@ -5,9 +5,9 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <div>
-    		<div className="logo"></div>
-    		<div className="cam"></div>
+      <div className="text">
+    		<span className="logo"></span>
+    		<span className="cam"></span>
       </div>
 		)
 	}

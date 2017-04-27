@@ -143,7 +143,7 @@ export default class Content extends React.Component {
     return (
       <div>
         {content}
-        </div>
+      </div>
     )
   }
 }

@@ -1,28 +1,27 @@
-var express= require('express');
-var bodyParser = require('body-parser');
+var express     = require('express');
+var bodyParser  = require('body-parser');
 var compression = require('compression');
-var path = require('path');
-var cors = require('cors');
-var shell = require('shelljs');
-var moment = require('moment');
-
-var app = express();
+var path        = require('path');
+var cors        = require('cors');
+var shell       = require('shelljs');
+var moment      = require('moment');
+var wallsClient = require('./walls-client');
 
 const LOADING_IMAGE     = 'balls.svg';
 const PREVIEW_IMAGE     = 'preview.jpg';
 const RECORDING_PATH    = '~/recording';
 const RECORDED_PATH     = '~/recorded';
 const BASE_URL          = process.env.BASE_URL;
-
-var recording;
+const BUILD_PATH        = path.join(__dirname, './../build');
 
 if (!BASE_URL){
     console.log('Missing environment variable BASE_URL');
     exit(1);
 }
     
-var static_path = path.join(__dirname, './../build');
+var recording;
 
+var app = express();
 app.enable('trust proxy');
 
 app.use(compression());
@@ -64,7 +63,7 @@ app.get('/api/image', cors(), function(req, res) {
     if (recording){
         res.send({ path: `/${LOADING_IMAGE}` });
     } else {
-        var previewImagePath = `${static_path}/${PREVIEW_IMAGE}`;
+        var previewImagePath = `${BUILD_PATH}/${PREVIEW_IMAGE}`;
         shell.exec(`raspistill -o ${previewImagePath} -w 480 -h 320`, function(code, stdout, stderr){
             if (shell.test('-f', `${previewImagePath}`)){
                 res.send({ path: `/${PREVIEW_IMAGE}?timestamp=${moment().valueOf()}` });
@@ -78,7 +77,7 @@ app.get('/api/image', cors(), function(req, res) {
 app.route('/').get(function(req, res) {
     res.header('Cache-Control', "max-age=60, must-revalidate, private");
     res.sendFile('index.html', {
-        root: static_path
+        root: BUILD_PATH
     });
 });
 
@@ -89,14 +88,14 @@ function nocache(req, res, next) {
   next();
 }
 
-app.use('/', express.static(static_path, {
+app.use('/', express.static(BUILD_PATH, {
     maxage: 31557600
 }));
 
 var server = app.listen(process.env.PORT || 5000, function () {
+    var host = server.address().address;
+    var port = server.address().port;
 
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Backend listening at http://%s:%s', host, port);
+    console.log('server listening at http://%s:%s', host, port);
+    wallsClient.init();
 });
