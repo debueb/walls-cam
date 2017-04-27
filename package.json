@@ -1,7 +1,7 @@
 {
-  "name": "walls-pi",
+  "name": "walls-cam",
   "version": "1.0.0",
-  "description": "node server with react running on raspberry",
+  "description": "node server with react running on raspberry pi",
   "main": "server/index.js",
   "scripts": {
     "dev-server": "nodemon server/index.js --watch server",
