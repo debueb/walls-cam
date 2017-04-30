@@ -18,12 +18,10 @@ module.exports = {
         const date = now.format('YYYY-MM-DD');
         const time = now.format('HH:mm');
         const url = `${BASE_URL}/api/bookings/${date}/${time}/video`;
-        console.log(`GET ${url}`);
         fetch(url)
             .then(function(res) {
                 return res.json();
             }).then(function(json) {
-                console.log(`Found ${json.length} video bookings`);
                 json.forEach((booking) => {
                     var cmd = `~/record.sh -d ${booking.duration*60} -c ${BASE_URL}/api/recordings/booking/${booking.uuid}`;
                     console.log(cmd);
