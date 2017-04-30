@@ -106,11 +106,11 @@ export default class Content extends React.Component {
         break;
       case false:
         content = (
-          <div className="form">
+          <div className="form text">
             <p className="text">
               Hier kannst Du die Kamera auf Padel Platz 3 ausrichten und Videoaufzeichnungen starten. 
             </p>
-            <img src={this.state.imagePath} width="100%"/>
+            <img src={this.state.imagePath} className="previewImage"/>
             <input type="button" onClick={this.refreshImage} disabled={this.state.imagePath === LOADING_IMAGE_PATH} className={"btn btn-primary unit full-width"} value="Bild aktualisieren"/>
             <hr className="unit"/>
             <p className="text unit">
