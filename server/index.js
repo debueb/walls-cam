@@ -92,10 +92,11 @@ app.use('/', express.static(BUILD_PATH, {
     maxage: 31557600
 }));
 
+wallsClient.init();
+
 var server = app.listen(process.env.PORT || 5000, function () {
     var host = server.address().address;
     var port = server.address().port;
 
     console.log('server listening at http://%s:%s', host, port);
-    wallsClient.init();
 });
