@@ -124,9 +124,9 @@ export default class Content extends React.Component {
             <div className="form-group">
               <label className="form-label">Dauer</label>
               <select name="recordDuration" value={this.state.recordDuration} onChange={this.handleChange} className="form-select full-width">
-                <option value="30">30min</option>
-                <option value="60">60min</option>
-                <option value="90">90min</option>
+                <option value="1800">30min</option>
+                <option value="3600">60min</option>
+                <option value="5400">90min</option>
               </select>
               <input type="submit" value="Video aufnehmen" className="btn btn-primary unit full-width"/>
             </div>
