@@ -10,7 +10,7 @@ module.exports = {
     init(){
         /* every full and half hour */
         console.log("scheduling video booking check");
-        cron.schedule('* 0,30 * * * *', this.checkForScheduledVideoRecordings);
+        cron.schedule('0 0,30 * * * *', this.checkForScheduledVideoRecordings);
     },
 
     checkForScheduledVideoRecordings(){
