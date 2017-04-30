@@ -10,7 +10,7 @@ export default class Content extends React.Component {
         imagePath: LOADING_IMAGE_PATH,
         email: '',
         emailValid: false,
-        recordDuration: 30,
+        recordDuration: 1800,
         recording: undefined,
         recordCount: undefined
       }
