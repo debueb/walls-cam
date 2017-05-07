@@ -1,4 +1,5 @@
 import React from 'react';
+import fetch from 'unfetch';
 
 const LOADING_IMAGE_PATH = '/balls.svg';
 
